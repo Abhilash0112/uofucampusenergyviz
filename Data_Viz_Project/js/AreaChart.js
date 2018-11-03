@@ -29,8 +29,10 @@ class AreaChart {
 
             let dataArr = bldgData["rows"].map(function (d) {
                 let dataTime = d["ts"];
-                let tempDate = that.rawToDate(dataTime);
-                //TODO: Figure out why this is returning a prototype for some reason.
+                dataTime = dataTime.replace("-06:00 Denver", "");
+                dataTime = dataTime.replace("t:", "");
+                let tempDate = new Date(dataTime);
+                
                 let time = that.dateToTime(tempDate);
                 return time;
             });
