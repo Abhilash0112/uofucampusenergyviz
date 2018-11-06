@@ -13,18 +13,17 @@ class MapChart {
             let lat = +mapdata[m].LAT;
             bound.extend(new google.maps.LatLng(lat, long));
         }
-        d3.selectAll("#map");
         let map = new google.maps.Map(d3.select("#map").node(), {
-            zoom: 1,
-            center: new google.maps.LatLng(40.764938, -111.842102),
-            mapTypeId: google.maps.MapTypeId.TERRAIN
+        zoom: 1,
+        center: new google.maps.LatLng(40.764938, -111.842102),
+        mapTypeId: google.maps.MapTypeId.TERRAIN
         });
-
+        d3.selectAll("#map");
         map.fitBounds(bound);
         let overlay = new google.maps.OverlayView();
         overlay.onAdd = function() {
             let layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
-                          .attr("class", "effective");
+                          .attr("class", "building");
             overlay.draw = function() {
                 let projection = this.getProjection(), padding = 10;
                 let marker = layer.selectAll("svg")
@@ -45,6 +44,11 @@ class MapChart {
                       .attr("cx", padding + 5)
                       .attr("cy", padding + 5)
                       .attr("class", "marker");
+                marker.append("text")
+                      .attr("x", padding + 7)
+                      .attr("y", padding)
+                      .attr("dy", ".31em")
+                      .text(function(d){ return d.key;});
             }
         }
         overlay.setMap(map);

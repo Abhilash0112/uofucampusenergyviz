@@ -1,26 +1,23 @@
- #map {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            color: blue;
-        }
+html, body, #map {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-        .effective,
-        .effective svg {
-            position: absolute;
-        }
+.building, .building svg {
+  position: absolute;
+}
 
-        .marker svg {
-            width: 60px;
-            height: 35px;
-            padding-right: 100px;
-            font: 12px sans-serif;
-        }
+.building svg {
+  width: 60px;
+  height: 20px;
+  padding-right: 100px;
+  font: 10px sans-serif;
+}
 
-
-        .marker circle {
-            fill: #3587D4;
-            stroke: black;
-            stroke-width: 1px;
-        }
+.building circle {
+  fill: brown;
+  stroke: black;
+  stroke-width: 1.5px;
+}
