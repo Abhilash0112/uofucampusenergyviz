@@ -5,14 +5,14 @@ class MapChart {
     }
 
     update() {
-        d3.csv("/data/Campus_Locations.csv").then(mapdata =>{
+        d3.csv("/data/CSV_FULL_SITE_LIST.csv").then(mapdata =>{
         console.log(mapdata);
         let bound = new google.maps.LatLngBounds();
         for (let m in mapdata){
             let long = +mapdata[m].LONG;
             let lat = +mapdata[m].LAT;
             bound.extend(new google.maps.LatLng(lat, long));
-//            console.log(long);
+            console.log(lat,long);
         }
         let map = new google.maps.Map(d3.select("#map").node(), {
         zoom: 15,
@@ -42,7 +42,7 @@ class MapChart {
                              .style("top", (d.y - padding) + "px");
                 }
                 marker.append("circle")
-                      .attr("r", 6)
+                      .attr("r", 4)
                       .attr("cx", padding + 5)
                       .attr("cy", padding + 5);
 
