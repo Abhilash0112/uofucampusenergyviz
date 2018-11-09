@@ -36,7 +36,7 @@ class AreaChart {
         //Must eventually add a param to update() containing the building(s) to render in the stacked area chart.
         d3.json("data/JSON_Files/SUTTON_BLDG_208V_PWR.JSON").then(bldgData => {
             let unit = bldgData["cols"][1]["unit"];
-
+            console.log(unit);
             if (unit === "kBTU") {
                 this.modifier = 3.412
             }
