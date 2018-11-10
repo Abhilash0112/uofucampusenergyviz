@@ -12,7 +12,7 @@ class MapChart {
             let long = +mapdata[m].LONG;
             let lat = +mapdata[m].LAT;
             bound.extend(new google.maps.LatLng(lat, long));
-            console.log(lat,long);
+            console.log(long);
         }
         let map = new google.maps.Map(d3.select("#map").node(), {
         zoom: 15,
@@ -32,7 +32,7 @@ class MapChart {
                                   .each(transform)
                                   .enter().append("svg")
                                   .each(transform)
-                                  .attr("class", "marker");
+                                  .attr("class", "building");
                 function transform(d) {
                     d = new google.maps.LatLng(+d.LAT, +d.LONG);
                     d = projection.fromLatLngToDivPixel(d);
