@@ -11,10 +11,9 @@ class AreaChart {
         this.margin = { top: 50, bottom: 50, left: 50, right: 50 } //Placeholder
 
         this.x = d3.scaleTime().range([0, this.width]);
-        this.y = d3.scaleLinear().range([0, this.height]);
-        this.revY = d3.scaleLinear().range([this.height, 0]);
+        this.y = d3.scaleLinear().range([this.height, 0]);
 
-        this.line = d3.area().x(function (d) { return that.x(d.time) }).y0(function (d) { return that.revY(0) }).y1(function (d) { return that.y(d.kWh) });
+        this.line = d3.area().x(function (d) { return that.x(d.time) }).y0(function (d) { return that.y(0) }).y1(function (d) { return that.y(d.kWh) });
 
         this.svg = d3.select("#chart")
             .append("svg").attr("id", "chartSVG");
@@ -34,20 +33,26 @@ class AreaChart {
     update() {
         //The below is a fixed example for now.
         //Must eventually add a param to update() containing the building(s) to render in the stacked area chart.
+        //Note to self:
+        //Making this a stack is gonna be a pain.
+        //I might have to use await for all of the selected CSVs to load their data
+        //then put them into the stack.
+
         d3.json("data/JSON_Files/SUTTON_BLDG_208V_PWR.JSON").then(bldgData => {
             let unit = bldgData["cols"][1]["unit"];
 
+            //Note that this code converts from any unit to kBTU
             if (unit === "kBTU") {
-                this.modifier = 3.412
+                this.modifier = 1.0
             }
             else if (unit === "BTU") {
-                this.modifier = 3.412 / 1000;
+                this.modifier = 1000.0;
             }
             else if (unit === "Wh") {
-                this.modifier = 1000;
+                this.modifier = 1000.0 / 3.41214;
             }
             else if (unit === "kWh") {
-                this.modifier = 1;
+                this.modifier = 1.0 / 3.41214;
             }
 
             let that = this;
@@ -71,7 +76,7 @@ class AreaChart {
             });
 
             this.x.domain(d3.extent(dataArr, function (d) { return d.time }));
-            this.y.domain(d3.extent(dataArr, function (d) { return d.kWh }));
+            this.y.domain([0, 100]);
             let lineFromData = this.line(dataArr);
 
             this.chartGroup.append("path")
@@ -82,7 +87,7 @@ class AreaChart {
                 .attr("d", lineFromData);
 
             this.xAxis.scale(this.x);
-            this.yAxis.scale(this.revY);
+            this.yAxis.scale(this.y);
 
             d3.select("#xGroup").call(this.xAxis);
             d3.select("#yGroup").call(this.yAxis);
