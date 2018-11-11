@@ -1,7 +1,6 @@
 class AreaChart {
 
     constructor() {
-        //TODO: Create SVG Bounds
         let that = this;
         this.rawToDate = d3.timeParse("t:%Y-%m-%dT%H:%M:%S%Z Denver");
         this.dateToTime = d3.timeFormat("%B %d, %Y, %I:%M %p");
@@ -28,6 +27,8 @@ class AreaChart {
 
         this.svg.append("g").attr("id", "xGroup").attr("transform", "translate(" + this.margin.left + "," + (this.height + this.margin.top) + ")");
         this.svg.append("g").attr("id", "yGroup").attr("transform", "translate(" + this.margin.left + "," + this.margin.right + ")");
+
+
     }
 
     update() {
@@ -37,6 +38,10 @@ class AreaChart {
         //Making this a stack is gonna be a pain.
         //I might have to use await for all of the selected CSVs to load their data
         //then put them into the stack.
+        //Additional note: After research, I think I've confirmed that I cannot just simply iterate through all of the files
+        //with pure Javascript (dammit Javascript)
+        //I'll need a direct string-to-file to access the correct file in the first place... and that's just all kinds of spaghetti.
+        //I'll have to ask a TA or something to figure this out.
 
         d3.json("data/JSON_Files/SUTTON_BLDG_208V_PWR.JSON").then(bldgData => {
             let unit = bldgData["cols"][1]["unit"];
