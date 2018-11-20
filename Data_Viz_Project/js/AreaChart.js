@@ -30,52 +30,67 @@ class AreaChart {
 
         this.svg.append("g").attr("id", "xGroup").attr("transform", "translate(" + this.margin.left + "," + (this.height + this.margin.top) + ")");
         this.svg.append("g").attr("id", "yGroup").attr("transform", "translate(" + this.margin.left + "," + this.margin.right + ")");
-
-
     }
 
-    update() {
-        //The below is a fixed example for now.
-        //Must eventually add a param to update() containing the building(s) to render in the stacked area chart.
+
+    //Params is an array of strings that correspond to the correct .csv files in the data folder
+    //default path data/fixed/combined_csvs/FILENAME.csv
+    update(params) {
         //Note to self:
         //Making this a stack is gonna be a pain.
         //I might have to use await for all of the selected CSVs to load their data
         //then put them into the stack.
-        
 
-        d3.csv("data/fixed/combined_csvs/0011.csv").then(bldgData => {
-            console.log(bldgData);
-            let that = this;
-            let dataArr = bldgData.map(function (d) {
-                let formatData = {};
-                let dataTime = d["ts"];
+        let that = this;
 
-                dataTime = dataTime.replace("-06:00 Denver", "");
-                formatData.time = new Date(dataTime);
+        //Load all csvs
+        let promises = params.map(function (d) {
+            return d3.csv("data/fixed/combined_csvs/" + d + ".csv")
+        });
 
-                formatData.kBTU = d["v0"].replace(" kBTU", "");
+        //Then once that's done, files will contain all of the csvs.
+        Promise.all(promises).then(function (files) {
+            //Okay, let's take this slow
+            //The files contains all of the csv data.
+            //I'll need to first map, then use another map to return a formatted entry.
+            //Then that second map will return a single entry to the mapped data
+            //Then the first map will return an array of array of data, sorted by the order in which it was passed via params.
+            let dataArrs = files.map(function (file) {
+                let dataArr = file.map(function (row) {
+                    let formatData = {};
+                    let dataTime = row["ts"];
 
-                return formatData;
+                    dataTime = dataTime.replace("-06:00 Denver", "");
+                    formatData.time = new Date(dataTime);
+
+                    formatData.kBTU = row["v0"].replace(" kBTU", "");
+
+                    return formatData;
+                });
+
+                return dataArr;
             });
 
-            console.log(dataArr);
+            that.x.domain(d3.extent(dataArrs[0], function (d) { return d.time }));
+            that.y.domain([0, 100000]);
 
-            this.x.domain(d3.extent(dataArr, function (d) { return d.time }));
-            this.y.domain([0, 100000]);
-            let lineFromData = this.line(dataArr);
+            let allPaths = that.chartGroup.selectAll("path").data(dataArrs);
 
-            this.chartGroup.append("path")
-                .datum(dataArr)
+            allPaths.exit().remove();
+
+            allPaths.enter().append("path")
                 .attr("stroke", "steelblue")
                 .attr("stroke-width", 1.5)
                 .style("fill", "lightblue")
-                .attr("d", lineFromData);
+                .attr("d", d => that.line(d));
 
-            this.xAxis.scale(this.x);
-            this.yAxis.scale(this.y);
 
-            d3.select("#xGroup").call(this.xAxis);
-            d3.select("#yGroup").call(this.yAxis);
+            that.xAxis.scale(that.x);
+            that.yAxis.scale(that.y);
+
+            d3.select("#xGroup").call(that.xAxis);
+            d3.select("#yGroup").call(that.yAxis);
         });
+        
     }
 }

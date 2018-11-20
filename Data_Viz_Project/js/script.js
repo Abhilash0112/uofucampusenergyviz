@@ -2,4 +2,4 @@ let mapChart = new MapChart();
 mapChart.update();
 let areaChart = new AreaChart();
 
-areaChart.update();
+areaChart.update(["0011"]);
