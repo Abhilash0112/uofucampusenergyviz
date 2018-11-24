@@ -12,10 +12,9 @@ class AreaChart {
         this.x = d3.scaleTime().range([0, this.width]);
         this.y = d3.scaleLinear().range([this.height, 0]);
 
-        this.line = d3.area()
+        this.line = d3.line()
             .x(function (d) { return that.x(d.time) })
-            .y0(that.y(0))
-            .y1(function (d) { return that.y(d.kBTU) });
+            .y(function (d) { return that.y(d.kBTU) });
 
         this.svg = d3.select("#chart")
             .append("svg").attr("id", "chartSVG");
@@ -30,16 +29,15 @@ class AreaChart {
 
         this.svg.append("g").attr("id", "xGroup").attr("transform", "translate(" + this.margin.left + "," + (this.height + this.margin.top) + ")");
         this.svg.append("g").attr("id", "yGroup").attr("transform", "translate(" + this.margin.left + "," + this.margin.right + ")");
+
+        this.colorScale = d3.scaleOrdinal(d3.schemeSet1);
     }
 
 
     //Params is an array of strings that correspond to the correct .csv files in the data folder
     //default path data/fixed/combined_csvs/FILENAME.csv
     update(params) {
-        //Note to self:
-        //Making this a stack is gonna be a pain.
-        //I might have to use await for all of the selected CSVs to load their data
-        //then put them into the stack.
+
 
         let that = this;
 
@@ -56,33 +54,52 @@ class AreaChart {
             //Then that second map will return a single entry to the mapped data
             //Then the first map will return an array of array of data, sorted by the order in which it was passed via params.
             let dataArrs = files.map(function (file) {
-                let dataArr = file.map(function (row) {
+                let dataArr = [];
+                let prevDate = null;
+                for (let i = 0; i < file.length; i++) {
+                    let row = file[i];
                     let formatData = {};
                     let dataTime = row["ts"];
 
                     dataTime = dataTime.replace("-06:00 Denver", "");
                     formatData.time = new Date(dataTime);
 
+                    //This section prevents the "repeat" dates.
+                    if (prevDate === null) {
+                        prevDate = formatData.time;
+                    }
+
+                    else {
+                        if (prevDate > formatData.time) {
+                            break;
+                        }
+                        else {
+                            prevDate = formatData.time;
+                        }
+                    }
+
                     formatData.kBTU = row["v0"].replace(" kBTU", "");
 
-                    return formatData;
-                });
+                    dataArr.push(formatData);
+                }
 
                 return dataArr;
             });
 
             that.x.domain(d3.extent(dataArrs[0], function (d) { return d.time }));
             that.y.domain([0, 100000]);
-
+ 
             let allPaths = that.chartGroup.selectAll("path").data(dataArrs);
 
             allPaths.exit().remove();
 
             allPaths.enter().append("path")
-                .attr("stroke", "steelblue")
+                .style("fill", "none")
                 .attr("stroke-width", 1.5)
-                .style("fill", "lightblue")
+                .attr("stroke-opacity", 0.7)
                 .attr("d", d => that.line(d));
+
+            that.chartGroup.selectAll("path").attr("stroke", (d, i) => that.colorScale(i % 9));
 
 
             that.xAxis.scale(that.x);
