@@ -1,4 +1,4 @@
-/*class BarChart {
+class BarChart {
 
     constructor() {
 
@@ -53,7 +53,7 @@
                         .enter()
                         .append("tr")
                         .on("mouseover", function(d){
-                            d3.select(this).style("background-color", "orange");
+                            d3.select(this).style("background-color", "steelblue");
                         })
                         .on("mouseout", function(d){
                             d3.select(this).style("background-color", "transparent")
@@ -73,4 +73,4 @@
     }
 
 
-}*/
+}

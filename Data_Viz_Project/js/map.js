@@ -15,6 +15,9 @@ class MapChart {
             bound.extend(new google.maps.LatLng(lat, long));
 //            console.log(long);
         }
+        let width = 600;
+        let height = 600;
+
         let map = new google.maps.Map(d3.select("#map").node(), {
         zoom: 16,
         center: new google.maps.LatLng(40.764938, -111.842102),
@@ -32,6 +35,8 @@ class MapChart {
                                   .data(mapdata)
                                   .each(transform)
                                   .enter().append("svg")
+                                  .attr("width", width)
+                                  .attr("height", height)
                                   .each(transform)
                                   .attr("class", "building");
                 let tooltip = d3.select("body")
@@ -39,7 +44,7 @@ class MapChart {
                                 .attr("class", "tooltip")
                                 .style("opacity", 0);
                 let colors = ["#CD5C5C", "#DC143C", "#C71585", "#FF8C00", "#BDB76B", "#8A2BE2", "#98FB98", "#00008B", "#2F4F4F", "#808080", "#B8860B"];
-                let colScale = d3.scaleLinear()
+                let colScale = d3.scaleOrdinal()
                                  .range(colors);
 //                console.log(colScale);
 //                let size = [];
@@ -54,7 +59,7 @@ class MapChart {
                       .attr("cx", padding)
                       .attr("cy", padding)
 //                      .data(mapdata)
-                      .attr("fill", function(d) { return colScale(d.mgntGroup);})
+                      .style("fill", function(d) { return colScale(d.mgntGroup);})
                       .on("mouseover", function(d) {
                         tooltip.transition()
                                .duration(50)

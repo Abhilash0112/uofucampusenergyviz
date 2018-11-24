@@ -17,9 +17,9 @@ html, body, #map {
 }
 
 .building circle {
-  fill: brown;
+  fill: transparent;
   stroke: black;
-  stroke-width: 1.5px;
+  stroke-width: 0.5px;
 }
 table-location {
     width: 100%;
