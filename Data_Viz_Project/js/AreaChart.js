@@ -107,7 +107,7 @@ class AreaChart {
             d3.select("#xGroup").call(that.xAxis);
             d3.select("#yGroup").call(that.yAxis);
 
-            that.barChart.update(dataArrs);
+            that.barChart.avgs(dataArrs);
         });
         
     }

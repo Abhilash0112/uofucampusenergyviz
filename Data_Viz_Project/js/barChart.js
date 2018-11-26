@@ -30,7 +30,7 @@ class barChart {
     }
 
     //Don't use this in another function -- I plan to pass the already-created data arrays from the Area Chart file to create the averages here.
-    update(dataArrs) {
+    avgs(dataArrs) {
         let dataAvgs = dataArrs.map(function (file) {
             let avg = 0;
 
