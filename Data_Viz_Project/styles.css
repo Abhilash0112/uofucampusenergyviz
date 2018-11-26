@@ -17,11 +17,29 @@ html, body, #map {
 }
 
 .building circle {
-  fill: brown;
+  fill: transparent;
   stroke: black;
-  stroke-width: 1.5px;
+  stroke-width: 0.5px;
+}
+table-location {
+    width: 100%;
+    border-collapse: collapse;
 }
 
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    cursor: s-resize;
+    background-repeat: no-repeat;
+    background-position: 3% center;
+}
+
+td, th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
 .tooltip {
   position: absolute;
   line-height: .7;
