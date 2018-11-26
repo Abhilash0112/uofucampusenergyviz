@@ -81,7 +81,6 @@ class barChart {
             .attr("y", d => this.y(d) - 5)
             .attr("text-anchor", "middle")
             .style("stroke", "black")
-            .style("fontFamily", "verdana")
             .text(d => parseInt(d));
 
         this.xAxis.scale(this.x);
