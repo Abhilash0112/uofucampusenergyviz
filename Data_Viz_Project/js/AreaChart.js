@@ -1,10 +1,7 @@
 class AreaChart {
 
-    constructor() {
+    constructor(barChart) {
         let that = this;
-        this.rawToDate = d3.timeParse("t:%Y-%m-%dT%H:%M:%S%Z Denver");
-        this.dateToTime = d3.timeFormat("%B %d, %Y, %I:%M %p");
-        this.modifier = 0;
         this.width = 500; //Placeholder
         this.height = 250;
         this.margin = { top: 50, bottom: 50, left: 50, right: 50 } //Placeholder
@@ -31,6 +28,8 @@ class AreaChart {
         this.svg.append("g").attr("id", "yGroup").attr("transform", "translate(" + this.margin.left + "," + this.margin.right + ")");
 
         this.colorScale = d3.scaleOrdinal(d3.schemeSet1);
+
+        this.barChart = barChart; //reference to barchart
     }
 
 
@@ -107,6 +106,8 @@ class AreaChart {
 
             d3.select("#xGroup").call(that.xAxis);
             d3.select("#yGroup").call(that.yAxis);
+
+            that.barChart.update(dataArrs);
         });
         
     }
