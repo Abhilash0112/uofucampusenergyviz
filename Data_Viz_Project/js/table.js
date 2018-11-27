@@ -1,7 +1,9 @@
 class Table {
 
     constructor() {
-
+//        this.mapChart = mapChart;
+//        this.barChart = barChart;
+//        this.AreaChart = AreaChart;
     }
 
     update() {
@@ -68,7 +70,11 @@ class Table {
             .enter()
             .append("td")
             .text(function(d){ return d.value;});
-
+        let result = [];
+        for (let i=0; i < tabledata.length; i++){
+            result = tabledata.push(i);
+        }
+        console.log(result);
         let dropdown = d3.select("#drop")
                          .append("select")
                          .selectAll("option")
@@ -80,19 +86,21 @@ class Table {
                          })
                          .text(function(d){
                             return d.key;
-                         })
-        console.log(ByName[0].values);
-        console.log(ByName[1].values);
-        console.log(ByName[2].values);
-        console.log(ByName[3].values);
-        console.log(ByName[4].values);
-        console.log(ByName[5].values);
-        console.log(ByName[6].values);
-        console.log(ByName[7].values);
-        console.log(ByName[8].values);
-        console.log(ByName[9].values);
-        console.log(ByName[10].values);
-        console.log(ByName[11].values);
+                         });
+
+
+//        console.log(ByName[0].values);
+//        console.log(ByName[1].values);
+//        console.log(ByName[2].values);
+//        console.log(ByName[3].values);
+//        console.log(ByName[4].values);
+//        console.log(ByName[5].values);
+//        console.log(ByName[6].values);
+//        console.log(ByName[7].values);
+//        console.log(ByName[8].values);
+//        console.log(ByName[9].values);
+//        console.log(ByName[10].values);
+//        console.log(ByName[11].values);
 
 
         });
