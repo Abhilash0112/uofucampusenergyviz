@@ -53,6 +53,7 @@ class MapChart {
 //                }
 //                console.log(size);
                 colScale.domain(d3.extent(mapdata, function(d) { return d.mgntGroup;}));
+
                 marker.append("circle")
                       .data(mapdata)
                       .attr("r", function(d) { return (Math.sqrt(d.aimProperty)/4)})
@@ -74,6 +75,7 @@ class MapChart {
                         .duration(200)
                         .style("opacity", 0);
                       });
+
 
                 function transform(d) {
                     d = new google.maps.LatLng(+d.LAT, +d.LONG);
