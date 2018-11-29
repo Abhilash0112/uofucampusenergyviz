@@ -57,7 +57,6 @@ class MapChart {
                 let ByName = d3.nest().key(function(d){ return d.Category;}).entries(col);
 //                console.log(ByName);
                 colScale.domain(d3.extent(mapdata, function(d) { return d.mgntGroup;}));
-
                 marker.append("circle")
                       .data(mapdata)
                       .attr("r", function(d) {
@@ -93,7 +92,6 @@ class MapChart {
                         .duration(200)
                         .style("opacity", 0);
                       });
-
 
                 function transform(d) {
                     d = new google.maps.LatLng(+d.LAT, +d.LONG);

@@ -1,22 +1,12 @@
 class Table {
 
     constructor() {
-<<<<<<< HEAD
 
-=======
-//        this.mapChart = mapChart;
-//        this.barChart = barChart;
-//        this.AreaChart = AreaChart;
->>>>>>> 748164a4525941a268c435913736209bc42a8561
     }
 
     update() {
         d3.csv("/data/CSV_FULL_SITE_LIST.csv").then(tabledata =>{
-<<<<<<< HEAD
 //        console.log(tabledata);
-=======
-        console.log(tabledata);
->>>>>>> 748164a4525941a268c435913736209bc42a8561
 
         let data = tabledata.filter(function(d) { return d.tz == 'Denver';});
 //        console.log(data);
@@ -27,16 +17,11 @@ class Table {
                     .attr("height", 1)
                     .attr("width", 1);
 
-<<<<<<< HEAD
         var table = d3.select("#table-location")
-=======
-        let table = d3.select("#table-location")
->>>>>>> 748164a4525941a268c435913736209bc42a8561
                       .append("table")
                       .attr("class", "table table-condensed table-striped"),
                       thead = table.append("thead"),
                       tbody = table.append("tbody");
-<<<<<<< HEAD
         var col = tabledata.map(function(d){ return { Category: d.mgntGroup, Area: d.area, PrimaryUsage: d.primaryFunction, Type: d.dis};});;
 
         let ByName = d3.nest().key(function(d){ return d.Category;}).entries(col);
@@ -53,43 +38,14 @@ class Table {
         var columns = Object.keys(col[0]);
         let sorting = true;
         var header = thead.append("tr")
-=======
-        let col = tabledata.map(function(d){ return { Category: d.mgntGroup, Area: d.area, PrimaryUsage: d.primaryFunction, Type: d.dis};});;
-        console.log(col);
-        let ByName = d3.nest().key(function(d){ return d.Category;}).entries(col);
-        console.log(ByName);
-        let columns = Object.keys(col[0]);
-        let sorting = true;
-        let header = thead.append("tr")
->>>>>>> 748164a4525941a268c435913736209bc42a8561
                           .selectAll("th")
                           .data(columns)
                           .enter()
                           .append("th")
-<<<<<<< HEAD
                           .text(function(columns) { return columns;});
 
         var rows = tbody.selectAll("tr")
                         .data(data1[0])
-=======
-                          .text(function(columns) { return columns;})
-                          .on("click", function(d){
-                            header.attr('class', 'header');
-                            if(sorting) {
-                                rows.sort(function(a, b){ return b[d] < a[d];});
-                                sorting = false;
-                                this.className = 'aes';
-                            }  else {
-                                rows.sort(function(a, b){ return b[d] > a[d];});
-                                sorting = true;
-                                this.className = 'des';
-                              }
-
-                          });
-
-        let rows = tbody.selectAll("tr")
-                        .data(ByName[0].values)
->>>>>>> 748164a4525941a268c435913736209bc42a8561
                         .enter()
                         .append("tr")
                         .on("mouseover", function(d){
@@ -97,13 +53,8 @@ class Table {
                         })
                         .on("mouseout", function(d){
                             d3.select(this).style("background-color", "transparent")
-<<<<<<< HEAD
 
                         })
-=======
-                        .on("click", function(d) { tableRowClicked(d);})
-                        });
->>>>>>> 748164a4525941a268c435913736209bc42a8561
         rows.selectAll("td")
             .data(function(d){
                 return columns.map(function(k){
@@ -113,15 +64,7 @@ class Table {
             .enter()
             .append("td")
             .text(function(d){ return d.value;});
-<<<<<<< HEAD
         rows.exit().remove();
-=======
-        let result = [];
-        for (let i=0; i < tabledata.length; i++){
-            result = tabledata.push(i);
-        }
-        console.log(result);
->>>>>>> 748164a4525941a268c435913736209bc42a8561
         let dropdown = d3.select("#drop")
                          .append("select")
                          .selectAll("option")
@@ -131,7 +74,6 @@ class Table {
                          .attr("value", function(d) {
                             return d.key;
                          })
-<<<<<<< HEAD
 //                         .attr("selected", function(d))
                          .text(function(d){
                             return d.key;
@@ -371,26 +313,6 @@ class Table {
                       .text(function(d){ return d.key;});
 
                 legend.exit().remove();
-=======
-                         .text(function(d){
-                            return d.key;
-                         });
-
-
-//        console.log(ByName[0].values);
-//        console.log(ByName[1].values);
-//        console.log(ByName[2].values);
-//        console.log(ByName[3].values);
-//        console.log(ByName[4].values);
-//        console.log(ByName[5].values);
-//        console.log(ByName[6].values);
-//        console.log(ByName[7].values);
-//        console.log(ByName[8].values);
-//        console.log(ByName[9].values);
-//        console.log(ByName[10].values);
-//        console.log(ByName[11].values);
-
->>>>>>> 748164a4525941a268c435913736209bc42a8561
 
         });
 
@@ -398,8 +320,4 @@ class Table {
     }
 
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 748164a4525941a268c435913736209bc42a8561
