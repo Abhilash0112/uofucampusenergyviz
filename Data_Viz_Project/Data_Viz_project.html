@@ -19,6 +19,7 @@
     <script src="js/barChart.js" async></script>
     <script src="js/AreaChart.js" async></script>
     <script src="js/map.js" async></script>
+    <script src="js/table.js" async></script>
     <script src="js/script.js" async></script>
 </head>
 
@@ -27,8 +28,15 @@
         <h1>Energy Consumption</h1>
         <!--<p class="info">Name: Your Name; E-Mail: Your E-Mail; UID: Your UID</p>-->
     </div>
+
+    <div id = "drop"></div>
     <div id = "table-location"></div>
-    <div id = "map"></div>
+    <div
+        <div id="legendContainer" class="legendContainer">
+	        <svg id="legend"></svg>
+        </div>
+        <div id = "map"></div>
+    </div>
     <div id = "chart"></div>
     <div id ="barChart"></div>
 </body>

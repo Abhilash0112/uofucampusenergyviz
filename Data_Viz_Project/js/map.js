@@ -15,8 +15,8 @@ class MapChart {
             bound.extend(new google.maps.LatLng(lat, long));
 //            console.log(long);
         }
-        let width = 600;
-        let height = 600;
+        let width = 500;
+        let height = 500;
 
         let map = new google.maps.Map(d3.select("#map").node(), {
         zoom: 16,
@@ -49,13 +49,31 @@ class MapChart {
 //                console.log(colScale);
 //                let size = [];
 //                for(let x in mapdata){
-//                    size.push(Math.sqrt(mapdata[x]["aimProperty"]/6));
+//                    size.push((mapdata[x]["area"]));
 //                }
 //                console.log(size);
+                let col = mapdata.map(function(d){ return { Category: d.mgntGroup, Area: d.area, PrimaryUsage: d.primaryFunction, Type: d.dis};});;
+//                console.log(col);
+                let ByName = d3.nest().key(function(d){ return d.Category;}).entries(col);
+//                console.log(ByName);
                 colScale.domain(d3.extent(mapdata, function(d) { return d.mgntGroup;}));
                 marker.append("circle")
                       .data(mapdata)
-                      .attr("r", function(d) { return (Math.sqrt(d.aimProperty)/4)})
+                      .attr("r", function(d) {
+                      let val = parseInt(d.area);
+//                      console.log(val);
+                      if ((val == 0) | (val == -1))
+                      {
+                      val = 4;
+//                      return 4;
+//                      console.log(val);
+                      return (val);
+                      }
+                      else
+                      {
+//                      console.log(Math.sqrt(val)/60);
+                      return (Math.sqrt(val)/60)}})
+
                       .attr("cx", padding)
                       .attr("cy", padding)
 //                      .data(mapdata)
