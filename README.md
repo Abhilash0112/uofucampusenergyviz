@@ -1,4 +1,4 @@
-#UofU Campus Energy Consumption
+UofU Campus Energy Consumption
 This project deals with the visualization of University of Utah Campus Energy Consumption for each building.
 
 Project Links
