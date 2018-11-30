@@ -85,9 +85,11 @@ class AreaChart {
                 return dataArr;
             });
 
+            let dataMax = that.barChart.avgs(dataArrs);
             that.x.domain(d3.extent(dataArrs[0], function (d) { return d.time }));
-            that.y.domain([0, 100000]);
+            that.y.domain([0, dataMax * 2]);
  
+
             let allPaths = that.chartGroup.selectAll("path").data(dataArrs);
 
             allPaths.exit().remove();
@@ -107,7 +109,7 @@ class AreaChart {
             d3.select("#xGroup").call(that.xAxis);
             d3.select("#yGroup").call(that.yAxis);
 
-            that.barChart.avgs(dataArrs);
+
         });
         
     }

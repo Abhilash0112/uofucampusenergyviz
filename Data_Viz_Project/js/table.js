@@ -1,6 +1,6 @@
 class Table {
 
-    constructor() {
+    constructor(areaChart) {
         this.table = d3.select("#table-location")
             .append("table")
             .attr("class", "table table-condensed table-striped");
@@ -13,6 +13,8 @@ class Table {
         let colors = ["#CD5C5C", "#DC143C", "#C71585", "#FF8C00", "#BDB76B", "#8A2BE2", "#98FB98", "#00008B", "#2F4F4F", "#808080", "#B8860B"];
         this.colScale = d3.scaleOrdinal()
             .range(colors);
+
+        this.areaChart = areaChart;
     }
 
     update() {
@@ -39,6 +41,11 @@ class Table {
                 .on("mouseout", function (d) {
                     d3.select(this).style("background-color", "transparent")
 
+                })
+                .on("click", function (d) {
+                    console.log("CLICKED ORIGINAL", d);
+                    console.log(d["Type"].slice(0, 4));
+                    that.areaChart.update([d["Type"].slice(0, 4)]);
                 })
                 ;
 
@@ -91,6 +98,12 @@ class Table {
                         .on("mouseout", function (d) {
                             d3.select(this).style("background-color", "transparent")
 
+                        })
+                        .on("click", function (d) {
+                            console.log("CLICKED NEW", d);
+                            console.log(d["Type"].slice(0, 4));
+
+                            that.areaChart.update([d["Type"].slice(0, 4)]);
                         });
 
                     let allData = allRows.selectAll("td")
@@ -100,7 +113,7 @@ class Table {
                             });
                         });
 
-                    allData.enter().append("td")                    
+                    allData.enter().append("td")
                     allData.exit().remove();
 
                     allRows.selectAll("td").transition()

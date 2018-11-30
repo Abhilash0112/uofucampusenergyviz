@@ -86,5 +86,7 @@ class barChart {
         d3.select("#yBarGroup").call(this.yAxis);
 
         this.chartGroup.selectAll("rect").attr("fill", (d, i) => this.colorScale(i % 9));
+
+        return dataMax;
     }
 }
