@@ -5,12 +5,12 @@ class MapChart {
     }
 
     update() {
-        d3.csv("/data/CSV_FULL_SITE_LIST.csv").then(mapdata =>{
-//        console.log(mapdata);
+        d3.csv("data/Final_Static_DataSet/CSV_FULL_SITE_LIST.csv").then(mapdata =>{
+        console.log(mapdata);
         let bound = new google.maps.LatLngBounds();
         for (let m in mapdata){
-            let long = +mapdata[m].LONG;
-            let lat = +mapdata[m].LAT;
+            let long = +mapdata[m].Longitude;
+            let lat = +mapdata[m].Latitude;
 //            console.log(lat);
             bound.extend(new google.maps.LatLng(lat, long));
 //            console.log(long);
@@ -83,7 +83,7 @@ class MapChart {
                       });
 
                 function transform(d) {
-                    d = new google.maps.LatLng(+d.LAT, +d.LONG);
+                    d = new google.maps.LatLng(+d.Latitude, +d.Longitude);
                     d = projection.fromLatLngToDivPixel(d);
 //                    console.log(d);
                     return d3.select(this)
