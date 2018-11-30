@@ -19,7 +19,7 @@ class MapChart {
         let height = 500;
 
         let map = new google.maps.Map(d3.select("#map").node(), {
-        zoom: 10,
+        zoom: 13,
         center: new google.maps.LatLng(40.764938, -111.842102),
         mapTypeId: google.maps.MapTypeId.TERRAIN
         });
