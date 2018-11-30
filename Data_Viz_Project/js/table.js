@@ -5,7 +5,7 @@ class Table {
     }
 
     update() {
-        d3.csv("/data/CSV_FULL_SITE_LIST.csv").then(tabledata =>{
+        d3.csv("data/Final_Static_DataSet/CSV_FULL_SITE_LIST.csv").then(tabledata =>{
 //        console.log(tabledata);
 //        console.log(data);
 //        console.log(Object.keys(bardata[0]));
@@ -20,19 +20,16 @@ class Table {
                       .attr("class", "table table-condensed table-striped"),
                       thead = table.append("thead"),
                       tbody = table.append("tbody");
+        table.exit().remove();
         var col = tabledata.map(function(d){ return { Category: d.mgntGroup, Area: d.area, PrimaryUsage: d.primaryFunction, Type: d.dis};});;
 
         let ByName = d3.nest().key(function(d){ return d.Category;}).entries(col);
         console.log(ByName);
         let data1 = [];
-        let data2 = [];
         for(let x in ByName){
             data1.push(ByName[x].values);
         }
 //        console.log(data1);
-        for(let x in data1){
-            data2.push(data1[x].values);
-        }
         var columns = Object.keys(col[0]);
         let sorting = true;
         var header = thead.append("tr")
@@ -78,12 +75,13 @@ class Table {
                          });
         d3.select("#drop")
           .on("change", function(){
+
             let selected = d3.select('select').property('value')
             console.log(selected);
 //            let Ind = Math.round(Math.random() * ByName.length);
 //            console.log(Ind);
             if(selected === "District 4 (Engineering)"){
-                tbody.selectAll("tr")
+                tbody.selectAll("td")
 //                  .exit()
 //                  .remove()
                   .data(ByName[1].values)
@@ -149,7 +147,7 @@ class Table {
                     .text(function(d){ return d.value;});
                rows.exit().remove();
             }
-            else if(selected === "District 3 (Athletics/Auxiliary/Venue)"){
+            else if(selected === "Hospital"){
                 tbody.selectAll("tr")
                   .data(ByName[4].values)
                   .selectAll("td")
@@ -165,7 +163,7 @@ class Table {
                     .text(function(d){ return d.value;});
                rows.exit().remove();
             }
-            else if(selected === "Hospital"){
+            else if(selected === "District 3 (Athletics/Auxiliary/Venue)"){
                 tbody.selectAll("tr")
                   .data(ByName[5].values)
                   .selectAll("td")
@@ -229,7 +227,7 @@ class Table {
                     .text(function(d){ return d.value;});
                rows.exit().remove();
             }
-            else if(selected === ""){
+            else if(selected === "Others"){
                 tbody.selectAll("tr")
                   .data(ByName[9].values)
                   .selectAll("td")
