@@ -30,6 +30,17 @@ class AreaChart {
         this.colorScale = d3.scaleOrdinal(d3.schemeSet1);
 
         this.barChart = barChart; //reference to barchart
+
+        this.svg.append("text").text("kBTU Used Over Time:").attr("x", 25).attr("y", 25);
+
+        this.x.domain([0, 1]);
+        this.y.domain([0, 1]);
+
+        this.xAxis.scale(this.x);
+        this.yAxis.scale(this.y);
+
+        d3.select("#xGroup").call(this.xAxis);
+        d3.select("#yGroup").call(this.yAxis);
     }
 
 
@@ -97,7 +108,9 @@ class AreaChart {
             allPaths.enter().append("path")
                 .style("fill", "none")
                 .attr("stroke-width", 1.5)
-                .attr("stroke-opacity", 0.7)
+                .attr("stroke-opacity", 0.7);
+
+            that.chartGroup.selectAll("path")
                 .attr("d", d => that.line(d));
 
             that.chartGroup.selectAll("path").attr("stroke", (d, i) => that.colorScale(i % 9));

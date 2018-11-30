@@ -7,11 +7,22 @@ html, body {
 #map{
     width: 700px;
     height: 700px;
-    top: -630px;
-    left: 1200px;
-    margin: 100;
+    left:200px;
     padding:0;
+    float:left;
 }
+
+#chart {
+    position:absolute;
+    top:1050px;
+}
+
+#barChart {
+    position: absolute;
+    top: 1050px;
+    left:600px;
+}
+
 .building, .building svg {
   position: absolute;
 }
@@ -28,8 +39,10 @@ html, body {
   stroke: black;
   stroke-width: 0.5px;
 }
-table-location {
-    width: 100%;
+#table-location {
+    float:left;
+    width:50%;
+    height:1000px;
     border-collapse: collapse;
 }
 
@@ -62,13 +75,12 @@ td, th {
 #legendContainer{
 	position:absolute;
 	overflow: auto;
-	top: 80px;
-    left: 1000px;
+    left: 960px;
 	height:800px;
-	width:290px;
+	width:260px;
 }
 #legend{
-	width:290px;
+	width:250px;
 	height:700px;
 }
 .legend {

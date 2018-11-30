@@ -27,6 +27,17 @@ class barChart {
         this.svg.append("g").attr("id", "yBarGroup").attr("transform", "translate(" + this.margin.left + "," + this.margin.right + ")");
 
         this.colorScale = d3.scaleOrdinal(d3.schemeSet1);
+
+        this.svg.append("text").text("Average kBTU used:").attr("x", 25).attr("y", 25);
+
+        this.x.domain([0, 1]);
+        this.y.domain([0, 1]);
+
+        this.xAxis.scale(this.x);
+        this.yAxis.scale(this.y);
+
+        d3.select("#xBarGroup").call(this.xAxis);
+        d3.select("#yBarGroup").call(this.yAxis);
     }
 
     //Don't use this in another function -- I plan to pass the already-created data arrays from the Area Chart file to create the averages here.
