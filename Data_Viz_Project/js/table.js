@@ -7,8 +7,6 @@ class Table {
     update() {
         d3.csv("/data/CSV_FULL_SITE_LIST.csv").then(tabledata =>{
 //        console.log(tabledata);
-
-        let data = tabledata.filter(function(d) { return d.tz == 'Denver';});
 //        console.log(data);
 //        console.log(Object.keys(bardata[0]));
 //        let columns = Object.keys(data[0]);
