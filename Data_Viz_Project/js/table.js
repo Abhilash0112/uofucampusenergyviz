@@ -22,7 +22,7 @@ class Table {
 
             let ByName = d3.nest().key(function (d) { return d.Category; }).entries(col);
             let columns = Object.keys(col[0]);
-            
+
             this.theaders
                 .data(columns)
                 .enter()
@@ -39,7 +39,8 @@ class Table {
                 .on("mouseout", function (d) {
                     d3.select(this).style("background-color", "transparent")
 
-                });
+                })
+                ;
 
             rows.selectAll("td")
                 .data(function (d) {
@@ -75,20 +76,38 @@ class Table {
                         }
                     }
 
-                    that.tbody.selectAll("tr")
-                        .data(selData)
-                        .selectAll("td")
+                    let newRows = that.tbody.selectAll("tr")
+                        .data(selData);
+
+
+                    newRows.enter().append("tr");
+                    newRows.exit().remove();
+
+                    let allRows = that.tbody.selectAll("tr");
+
+                    allRows.on("mouseover", function (d) {
+                        d3.select(this).style("background-color", "steelblue");
+                    })
+                        .on("mouseout", function (d) {
+                            d3.select(this).style("background-color", "transparent")
+
+                        });
+
+                    let allData = allRows.selectAll("td")
                         .data(function (d) {
                             return columns.map(function (k) {
                                 return { 'value': d[k], 'name': k }
                             });
-                        })
-                        .transition()
+                        });
+
+                    allData.enter().append("td")                    
+                    allData.exit().remove();
+
+                    allRows.selectAll("td").transition()
                         .duration(500)
                         .text(function (d) { return d.value; });
-                    rows.exit().remove();
                 });
-            
+
             this.colScale.domain(d3.extent(tabledata, function (d) { return d.mgntGroup; }));
 
             let legend = d3.select("#legend")
