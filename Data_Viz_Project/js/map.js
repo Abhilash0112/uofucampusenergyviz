@@ -61,19 +61,8 @@ class MapChart {
                       .data(mapdata)
                       .attr("r", function(d) {
                       let val = parseInt(d.area);
-//                      console.log(val);
-                      if ((val == 0) | (val == -1))
-                      {
-                      val = 4;
-//                      return 4;
-//                      console.log(val);
-                      return (val);
-                      }
-                      else
-                      {
-//                      console.log(Math.sqrt(val)/60);
-                      return (Math.sqrt(val)/60)}})
-
+                      console.log(val);
+                      return (Math.sqrt(val)/60)})
                       .attr("cx", padding)
                       .attr("cy", padding)
 //                      .data(mapdata)
