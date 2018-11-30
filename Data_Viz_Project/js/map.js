@@ -6,7 +6,7 @@ class MapChart {
 
     update() {
         d3.csv("data/Final_Static_DataSet/CSV_FULL_SITE_LIST.csv").then(mapdata =>{
-        console.log(mapdata);
+        //console.log(mapdata);
         let bound = new google.maps.LatLngBounds();
         for (let m in mapdata){
             let long = +mapdata[m].Longitude;
@@ -61,7 +61,7 @@ class MapChart {
                       .data(mapdata)
                       .attr("r", function(d) {
                       let val = parseInt(d.area);
-                      console.log(val);
+                      //console.log(val);
                       return (Math.sqrt(val)/60)})
                       .attr("cx", padding)
                       .attr("cy", padding)
