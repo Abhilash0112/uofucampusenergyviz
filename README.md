@@ -9,7 +9,7 @@ The [Process Book](https://github.com/Abhilash0112/uofucampusenergyviz/blob/mast
 The [Screencast](https://youtu.be/_-6WcOU1UMQ) has a video demonstration of the visualization.
 
 Data Processing
-The data is obtained from NASA's Open Data Portal and The Center for Near Earth Studies, which details every event. The data can be obtained in various file formats, which helps reduce the processing time required for academic projects.
+The data was obtained from the University of Utah's Skyspark system through queries to a Fanthom rest web API. The data was then aggregated using the source.py file and then combined into three CSV files. The initial goal of the project was to mimic the actual responses from the rest API, however there proved to be no way to link the JSON files together, therefore the static data set was created.
 
 Visualization
 We have three main forms of visualizations in order to represent the dataset and provide access to different comparisions between the datasets. You can explore more here https://abhilash0112.github.io/uofucampusenergyviz/Data_Viz_Project/. Please use Google Chrome to get the best experience.
