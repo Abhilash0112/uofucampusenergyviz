@@ -6,7 +6,7 @@ The [Project Website](https://abhilash0112.github.io/uofucampusenergyviz/Data_Vi
 
 The [Process Book](https://github.com/Abhilash0112/uofucampusenergyviz/blob/master/Process%20Book%20(Milestone%20and%20Peer%20Feedback).pdf) has the details on the visualization and its interaction.
 
-The [Screencast](https://www.youtube.com/watch?v=NXHH0_FB-sE) has a video demonstration of the visualization.
+The [Screencast]() has a video demonstration of the visualization.
 
 Data Processing
 The data is obtained from NASA's Open Data Portal and The Center for Near Earth Studies, which details every event. The data can be obtained in various file formats, which helps reduce the processing time required for academic projects.
