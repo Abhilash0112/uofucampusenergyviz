@@ -4,7 +4,7 @@ This project deals with the visualization of University of Utah Campus Energy Co
 ### Project Links
 The [Project Website](https://abhilash0112.github.io/uofucampusenergyviz/Data_Viz_Project/) has the live visualization.
 
-The [Process Book](https://github.com/Abhilash0112/uofucampusenergyviz/Process_Book _(Final).pdf)  has the details on the visualization and its interaction.
+The [Process Book]((https://github.com/Abhilash0112/uofucampusenergyviz/Process_Book _(Final).pdf))  has the details on the visualization and its interaction.
 
 The [Screencast](https://youtu.be/_-6WcOU1UMQ) has a video demonstration of the visualization.
 
