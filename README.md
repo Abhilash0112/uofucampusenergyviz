@@ -1,12 +1,12 @@
 UofU Campus Energy Consumption
 This project deals with the visualization of University of Utah Campus Energy Consumption for each building.
 
-Project Links
-The Project Website has the live visualization.
+### Project Links
+The [Project Website](https://abhilash0112.github.io/uofucampusenergyviz/Data_Viz_Project/) has the live visualization.
 
-The Process Book has the details on the visualization and its interaction.
+The [Process Book](https://github.com/Abhilash0112/uofucampusenergyviz/blob/master/Process%20Book%20(Milestone%20and%20Peer%20Feedback).pdf) has the details on the visualization and its interaction.
 
-The Screencast has a video demonstration of the visualization.
+The [Screencast](https://www.youtube.com/watch?v=NXHH0_FB-sE) has a video demonstration of the visualization.
 
 Data Processing
 The data is obtained from NASA's Open Data Portal and The Center for Near Earth Studies, which details every event. The data can be obtained in various file formats, which helps reduce the processing time required for academic projects.
